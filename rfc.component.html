@@ -1,0 +1,71 @@
+<h1>Reactive Driven Signup Form</h1>
+<div class="form-style">
+<form [formGroup]="myform" (submit)="onSubmit()">
+    <div class="user-style">
+        <input type="text" formControlName="nm" required>
+        <div *ngIf="name && name.invalid && name.touched" style="color:red;">
+           Name can't be empty
+        </div> 
+        <div ></div>    
+    <label>Name</label>
+    </div>
+    <div class="user-style">
+        <input type="text" formControlName="em" required pattern="^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$">
+        <div *ngIf="mail && mail.invalid && mail.touched" style="color:red;">
+            <div *ngIf="mail?.errors?.['required']" style="color:red;"> 
+            E-mail can't be empty
+            </div>
+        </div>
+        <div *ngIf="mail?.errors?.['pattern']"  style="color:red;">
+            Enter valid e-mail id
+        </div>
+          <label>E-Mail</label>
+        </div>
+    <div class="user-style">
+        <input type="text"  formControlName="un" required minlength="6" maxlength="15" class="form-control form-control-sm">
+            <div *ngIf="user && user.invalid && user.touched" style="color:red;">
+                <div *ngIf="user?.errors?.['required']" style="color:red;">   
+                Username can't be empty
+                </div>
+            <div *ngIf="user?.errors?.['minlength']" style="color:red;">
+                This field must have at least 6 characters
+              </div>
+              <div *ngIf="user?.errors?.['maxlength']" style="color:red;">
+                This field shouldn't exceed 15 characters
+              </div>
+            </div>
+        
+        <label>Username</label>
+    </div>
+    <div class="user-style">
+        <input type="password" formControlName="pw" required minlength="8" maxlength="15" >
+        <div *ngIf="pass && pass.invalid && pass.touched" style="color:red;">
+            <div *ngIf="pass?.errors?.['required']" style="color:red;"> 
+            Password can't be empty
+            </div> 
+        <div *ngIf="pass?.errors?.['minlength']" style="color:red;">
+            This field must have at least 8 characters
+          </div>
+          <div *ngIf="pass?.errors?.['maxlength']" style="color:red;">
+            This field shouldn't exceed 15 characters
+          </div>
+        </div>
+          <label>Password</label>
+    </div>  
+      <div class="user-style">
+        <input type="text"  formControlName="ph" required pattern="^((\\+91-?)|0)?[0-9]{10}$">
+        <div *ngIf="pno && pno.invalid && pno.touched" style="color:red;">
+            <div *ngIf="pno?.errors?.['required']" style="color:red;"> 
+            Phone number can't be empty
+            </div>
+        </div>
+        <div *ngIf="pno?.errors?.['pattern']"  style="color:red;">
+            Enter valid phone number
+        </div>
+          <label>Phone number</label>
+      </div>
+      
+      <br>
+    <button class="button">Submit</button>
+    </form>
+</div>

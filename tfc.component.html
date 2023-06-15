@@ -1,0 +1,48 @@
+<h1>Template Driven Signup Form</h1>
+<div class="form-style">
+<form #forms="ngForm" (submit)="submit(forms)" >
+    <div class="user-style">
+        <input #nm="ngModel" required  ngModel type="text" name="nm" >
+        <div *ngIf="nm.value.length==0 && nm.touched" style="color:red;">Name can't be empty</div>    
+    <label>Name</label>
+    </div>
+    <div class="user-style">
+        <input #em="ngModel" required email ngModel type="text" name="em" pattern="^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$">
+        <div *ngIf="em.touched && em.invalid" class="alert alert-danger">
+            <div *ngIf="em.errors?.['required']" style="color:red;" class="invalid-feedback">Email is required</div>
+            <div *ngIf="em.errors?.['pattern']" style="color:red;" class="invalid-feedback">Email should be valid</div>
+            <div *ngIf="em.errors?.['minlength']" style="color:red;" class="invalid-feedback">Email should be minimum 10 characters</div>
+          </div>
+          <label>E-Mail</label>
+        </div>
+    <div class="user-style">
+        <input #un="ngModel" id="un" required  ngModel type="text" name="un" required minlength="8" maxlength="15">
+        <div class="alert alert-danger" *ngIf="un.touched && !un.valid">
+            <div *ngIf="un.errors && un.errors['required']" style="color:red;">Username is required.</div>
+            <div *ngIf="un.errors && un.errors['minlength']" style="color:red;">Username is minimum 8 characters</div>
+            <div *ngIf="un.errors && un.errors['maxlength']" style="color:red;">Username is maximum 15 character.</div>
+        </div>
+        <label>Username</label>
+    </div>
+    <div class="user-style">
+        <input #pw="ngModel" required  ngModel type="password"  name="pw" required minlength="8" maxlength="15" >
+        <div *ngIf="pw.touched && pw.invalid" class="alert alert-danger">
+            <div *ngIf="pw.errors?.['required']" class="invalid-feedback" style="color:red;">Password is required</div>
+            <div *ngIf="pw.errors?.['minlength']" class="invalid-feedback" style="color:red;">Password should be minimum 8 characters</div>      
+            <div *ngIf="pw.errors?.['maxlength']" class="invalid-feedback"style="color:red;">Password should not exceed 15 characters</div>
+          </div>
+          <label>Password</label>
+    </div>  
+      <div class="user-style">
+        <input #ph="ngModel" required  ngModel type="text"  name="ph" pattern="^((\\+91-?)|0)?[0-9]{10}$">
+        <div *ngIf="ph.touched && ph.invalid" class="alert alert-danger">
+            <div *ngIf="ph.errors?.['required']" class="invalid-feedback" style="color:red;">Phone Number is required</div>
+            <div *ngIf="ph.errors?.['pattern']" class="invalid-feedback" style="color:red;">Phone Number should be valid</div>
+            <div *ngIf="ph.errors?.['minlength']" class="invalid-feedback" style="color:red;">Phone Number should be minimum 10 characters</div>
+          </div>
+          <label>Phone number</label>
+      </div>
+    <button class="button">Submit</button>
+    </form>
+</div>
+
